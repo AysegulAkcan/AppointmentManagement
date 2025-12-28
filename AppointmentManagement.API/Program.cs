@@ -14,11 +14,18 @@ builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
-        policy => policy.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
+    options.AddPolicy("AllowAngular",
+        policy =>
+        {
+            policy
+                .WithOrigins(
+                    "https://appointment-management-k7p9.vercel.app"
+                )
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
 });
+
 
 var app = builder.Build();
 
