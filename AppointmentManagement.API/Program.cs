@@ -14,15 +14,12 @@ builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngular",
-        policy =>
-        {
-            policy
-                .WithOrigins("http://localhost:4200")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
+    options.AddPolicy("AllowAll",
+        policy => policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
 });
+
 var app = builder.Build();
 
 
