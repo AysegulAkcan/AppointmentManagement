@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AppointmentList, AppointmentService } from 'src/services/appointment.service';
 // import { AppointmentService, AppointmentList } from '../services/appointment.service';
 
-
 @Component({
 selector: 'app-appointment-list',
 template: `
@@ -10,24 +9,21 @@ template: `
 <h2>Randevu Listesi</h2>
 <table mat-table [dataSource]="data">
 
+<ng-container matColumnDef="appointmentDate">
+<th mat-header-cell *matHeaderCellDef>Tarih</th>
+ <td mat-cell *matCellDef="let x">
+    {{ x.appointmentDate | date:'HH:mm dd MMMM yyyy' }}
+  </td></ng-container>
 
 <ng-container matColumnDef="firstName">
 <th mat-header-cell *matHeaderCellDef>Ad</th>
 <td mat-cell *matCellDef="let x">{{x.firstName}}</td>
 </ng-container>
 
-
 <ng-container matColumnDef="lastName">
 <th mat-header-cell *matHeaderCellDef>Soyad</th>
 <td mat-cell *matCellDef="let x">{{x.lastName}}</td>
 </ng-container>
-
-
-<ng-container matColumnDef="appointmentDate">
-<th mat-header-cell *matHeaderCellDef>Tarih</th>
- <td mat-cell *matCellDef="let x">
-    {{ x.appointmentDate | date:'HH:mm dd MMMM yyyy' }}
-  </td></ng-container>
 
 <ng-container matColumnDef="actions">
   <th mat-header-cell *matHeaderCellDef>İşlemler</th>

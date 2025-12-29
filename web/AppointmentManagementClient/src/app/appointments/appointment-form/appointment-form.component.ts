@@ -9,6 +9,15 @@ import { AppointmentService } from 'src/services/appointment.service';
 <mat-card>
 <h2>Randevu Oluştur</h2>
 <form [formGroup]="form" (ngSubmit)="submit()">
+  
+  <mat-form-field appearance="outline" class="full">
+  <mat-label>Randevu Tarihi ve Saati</mat-label>
+  <input matInput 
+         type="datetime-local" 
+         formControlName="date"
+         placeholder="Tarih ve saat seçin">
+</mat-form-field>
+
 <mat-form-field appearance="outline" class="full">
 <mat-label>Ad</mat-label>
 <input matInput formControlName="firstName">
@@ -26,13 +35,7 @@ import { AppointmentService } from 'src/services/appointment.service';
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field> -->
 
-<mat-form-field appearance="outline" class="full">
-  <mat-label>Randevu Tarihi ve Saati</mat-label>
-  <input matInput 
-         type="datetime-local" 
-         formControlName="date"
-         placeholder="Tarih ve saat seçin">
-</mat-form-field>
+
 
 <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Kaydet</button>
 </form>
