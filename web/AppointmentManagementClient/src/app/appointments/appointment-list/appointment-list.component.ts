@@ -26,7 +26,7 @@ template: `
 <ng-container matColumnDef="appointmentDate">
 <th mat-header-cell *matHeaderCellDef>Tarih</th>
  <td mat-cell *matCellDef="let x">
-    {{ x.appointmentDate | date:'dd MMMM yyyy HH:mm' }}
+    {{ x.appointmentDate | date:'HH:mm dd MMMM yyyy' }}
   </td></ng-container>
 
 <ng-container matColumnDef="actions">
