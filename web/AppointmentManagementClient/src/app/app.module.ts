@@ -21,12 +21,16 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppointmentFormComponent } from './appointments/appointment-form/appointment-form.component';
 import { AppointmentListComponent } from './appointments/appointment-list/appointment-list.component';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeTr from '@angular/common/locales/tr';
+registerLocaleData(localeTr);
 
 @NgModule({
   declarations: [
     AppComponent,
     AppointmentFormComponent,
-    AppointmentListComponent
+    AppointmentListComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,7 @@ import { AppointmentListComponent } from './appointments/appointment-list/appoin
     MatCardModule,
     MatIconModule,
   ],
-  providers: [],
+ providers: [{ provide: LOCALE_ID, useValue: 'tr-TR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
