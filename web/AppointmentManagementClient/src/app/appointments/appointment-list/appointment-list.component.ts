@@ -25,8 +25,9 @@ template: `
 
 <ng-container matColumnDef="appointmentDate">
 <th mat-header-cell *matHeaderCellDef>Tarih</th>
-<td mat-cell *matCellDef="let x">{{x.appointmentDate | date:'short'}}</td>
-</ng-container>
+ <td mat-cell *matCellDef="let x">
+    {{ x.appointmentDate | date:'dd MMMM yyyy HH:mm' }}
+  </td></ng-container>
 
 <ng-container matColumnDef="actions">
   <th mat-header-cell *matHeaderCellDef>İşlemler</th>
