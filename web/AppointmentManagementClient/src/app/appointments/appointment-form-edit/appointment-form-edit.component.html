@@ -1,0 +1,33 @@
+<!-- <h2 mat-dialog-title>
+  {{ isEdit ? 'Randevu Güncelle' : 'Randevu Oluştur' }}
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form">
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Ad</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Soyad</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Tarih</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="appointmentDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">İptal</button>
+  <button mat-raised-button color="primary" (click)="save()">
+    {{ isEdit ? 'Güncelle' : 'Kaydet' }}
+  </button>
+</mat-dialog-actions> -->
