@@ -9,10 +9,16 @@ template: `
 <h2>Randevu Listesi</h2>
 <table mat-table [dataSource]="data">
 
+<ng-container matColumnDef="appointmentHour">
+<th mat-header-cell *matHeaderCellDef>Saat</th>
+ <td mat-cell *matCellDef="let x">
+    {{ x.appointmentDate | date:'HH:mm' }}
+  </td></ng-container>
+  
 <ng-container matColumnDef="appointmentDate">
 <th mat-header-cell *matHeaderCellDef>Tarih</th>
  <td mat-cell *matCellDef="let x">
-    {{ x.appointmentDate | date:'HH:mm dd MMMM yyyy' }}
+    {{ x.appointmentDate | date:'dd MMMM yyyy' }}
   </td></ng-container>
 
 <ng-container matColumnDef="firstName">
@@ -43,7 +49,7 @@ template: `
 export class AppointmentListComponent implements OnInit {
 data: AppointmentList[] = [];
 
-columns = ['firstName', 'lastName', 'appointmentDate', 'actions'];
+columns = ['appointmentHour' ,'appointmentDate', 'firstName', 'lastName','actions'];
 
 constructor(private service: AppointmentService) {}
 
