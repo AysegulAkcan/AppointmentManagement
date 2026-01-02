@@ -28,7 +28,7 @@ namespace AppointmentManagement.Infrastructure.Repositories
         public async Task<List<Appointment>> GetAllAsync()
         {
             return await _context.Appointments
-                .OrderByDescending(x => x.AppointmentDate)
+                .OrderBy(x => x.AppointmentDate)
                 .ToListAsync();
         }
         public async Task DeleteAsync(Guid id)
