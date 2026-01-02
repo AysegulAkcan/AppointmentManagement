@@ -15,12 +15,14 @@
       <input matInput formControlName="lastName">
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="w-100">
-      <mat-label>Tarih</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="appointmentDate">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+ <mat-form-field appearance="outline" class="full">
+  <mat-label>Randevu Tarihi ve Saati</mat-label>
+  <input
+    matInput
+    type="datetime-local"
+    formControlName="appointmentDate"
+    placeholder="Tarih ve saat seçin">
+</mat-form-field>
 
   </form>
 </mat-dialog-content>
