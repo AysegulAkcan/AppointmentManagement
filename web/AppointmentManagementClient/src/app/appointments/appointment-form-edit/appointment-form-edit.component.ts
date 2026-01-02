@@ -48,7 +48,7 @@ export class AppointmentFormEditComponent implements OnInit {
         id: formValue.id!,
         firstName: formValue.firstName!,
         lastName: formValue.lastName!,
-        appointmentDate: formValue.appointmentDate!
+         appointmentDate: new Date(formValue.appointmentDate!).toISOString()
       }).subscribe({
         next: () => {
           this.dialogRef.close(true); // true = başarılı
