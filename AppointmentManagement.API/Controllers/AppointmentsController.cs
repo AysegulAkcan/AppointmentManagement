@@ -14,7 +14,6 @@ namespace AppointmentManagement.API.Controllers
         {
             _appointmentService = appointmentService;
         }
-
         /// <summary>
         /// Yeni randevu oluşturur
         /// </summary>
@@ -39,6 +38,27 @@ namespace AppointmentManagement.API.Controllers
         {
             await _appointmentService.DeleteAsync(id);
             return NoContent();
+        }
+        /// <summary>
+        /// ID'ye göre randevu getirir
+        /// </summary>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var result = await _appointmentService.GetByIdAsync(id);
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] AppointmentListDto dto)
+        {
+            if (id != dto.Id)
+                return BadRequest("ID uyuşmazlığı");
+
+            await _appointmentService.UpdateAsync(dto);
+            return Ok();
         }
     }
 }

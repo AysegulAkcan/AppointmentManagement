@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AppointmentList, AppointmentService } from 'src/services/appointment.service';
+import { AppointmentFormEditComponent } from '../appointment-form-edit/appointment-form-edit.component';
 // import { AppointmentService, AppointmentList } from '../services/appointment.service';
 
 @Component({
-selector: 'app-appointment-list',
-template: `
+  selector: 'app-appointment-list',
+  template: `
 <mat-card>
 <h2>Randevu Listesi</h2>
 <table mat-table [dataSource]="data">
@@ -37,6 +39,9 @@ template: `
     <button mat-icon-button color="warn" (click)="delete(x.id)">
      <mat-icon>delete</mat-icon>
     </button>
+      <button mat-icon-button color="primary" (click)="update(x.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
   </td>
 </ng-container>
 
@@ -47,32 +52,49 @@ template: `
 `
 })
 export class AppointmentListComponent implements OnInit {
-data: AppointmentList[] = [];
+  data: AppointmentList[] = [];
 
-columns = ['appointmentHour' ,'appointmentDate', 'firstName', 'lastName','actions'];
+  columns = ['appointmentHour', 'appointmentDate', 'firstName', 'lastName', 'actions'];
 
-constructor(private service: AppointmentService) {}
+  constructor(
+    private service: AppointmentService,
+    private dialog: MatDialog
+  ) { }
 
-delete(id: string) {
-  if (!confirm('Bu randevuyu silmek istiyor musunuz?')) return;
+  update(id: string) {
+    const dialogRef = this.dialog.open(AppointmentFormEditComponent, {
+      width: '500px',
+      disableClose: true,
+      data: { id }
+    });
 
-  this.service.delete(id).subscribe(() => {
-    this.data = this.data.filter(x => x.id !== id); // UI anında güncellenir
-  });
-}
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.service.getAll().subscribe(x => this.data = x);
+      }
+    });
+  }
 
-ngOnInit() {
-this.service.getAll().subscribe(x => this.data = x);
-}
-// ngOnInit() {
-//   this.load();
+  delete(id: string) {
+    if (!confirm('Bu randevuyu silmek istiyor musunuz?')) return;
 
-//   this.service.refresh$.subscribe(() => {
-//     this.load();
-//   });
-// }
+    this.service.delete(id).subscribe(() => {
+      this.data = this.data.filter(x => x.id !== id);
+    });
+  }
 
-// load() {
-//   this.service.getAll().subscribe(x => this.data = x);
-// }
+  ngOnInit() {
+    this.service.getAll().subscribe(x => this.data = x);
+  }
+  // ngOnInit() {
+  //   this.load();
+
+  //   this.service.refresh$.subscribe(() => {
+  //     this.load();
+  //   });
+  // }
+
+  // load() {
+  //   this.service.getAll().subscribe(x => this.data = x);
+  // }
 }

@@ -16,13 +16,19 @@ export interface AppointmentList {
   appointmentDate: string;
   createdAt: string;
 }
+export interface AppointmentUpdate {
+  id: string;
+  firstName: string;
+  lastName: string;
+  appointmentDate: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class AppointmentService {
 
   private apiUrl = `${environment.apiUrl}/appointments`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   create(data: AppointmentCreate): Observable<void> {
     return this.http.post<void>(this.apiUrl, data);
@@ -34,5 +40,11 @@ export class AppointmentService {
 
   delete(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+  update(data: AppointmentUpdate): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${data.id}`, data);
+  }
+  getById(id: string): Observable<AppointmentList> {
+    return this.http.get<AppointmentList>(`${this.apiUrl}/${id}`);
   }
 }

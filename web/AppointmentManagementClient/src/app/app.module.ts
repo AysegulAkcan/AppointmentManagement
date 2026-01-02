@@ -24,6 +24,8 @@ import { AppointmentListComponent } from './appointments/appointment-list/appoin
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeTr from '@angular/common/locales/tr';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AppointmentFormEditComponent } from './appointments/appointment-form-edit/appointment-form-edit.component';
 registerLocaleData(localeTr);
 
 @NgModule({
@@ -31,6 +33,7 @@ registerLocaleData(localeTr);
     AppComponent,
     AppointmentFormComponent,
     AppointmentListComponent,
+    AppointmentFormEditComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ registerLocaleData(localeTr);
     MatNativeDateModule,
     MatCardModule,
     MatIconModule,
+    MatDialogModule
   ],
  providers: [{ provide: LOCALE_ID, useValue: 'tr-TR' }],
   bootstrap: [AppComponent]

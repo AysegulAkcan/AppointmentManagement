@@ -40,7 +40,6 @@ namespace AppointmentManagement.Application.Services
         {
             await _repository.DeleteAsync(id);
         }
-
         public async Task<List<AppointmentListDto>> GetAllAsync()
         {
             var appointments = await _repository.GetAllAsync();
@@ -54,10 +53,24 @@ namespace AppointmentManagement.Application.Services
                 CreatedAt = x.CreatedAt
             }).ToList();
         }
-        //public async Task DeleteAsync(Guid id)
-        //{
-        //    await _repository.DeleteAsync(id);
-        //}
+        public async Task<AppointmentListDto?> GetByIdAsync(Guid id)
+        {
+            var appointment = await _repository.GetByIdAsync(id);
+            if (appointment == null)
+                return null;
 
+            return new AppointmentListDto
+            {
+                Id = appointment.Id,
+                FirstName = appointment.FirstName,
+                LastName = appointment.LastName,
+                AppointmentDate = appointment.AppointmentDate,
+                CreatedAt = appointment.CreatedAt
+            };
+        }
+        public async Task UpdateAsync(AppointmentListDto appointmentListDto)
+        {
+            await _repository.UpdateAsync(appointmentListDto);
+        }
     }
 }

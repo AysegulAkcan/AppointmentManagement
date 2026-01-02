@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppointmentManagement.Application.DTOs;
 using AppointmentManagement.Application.Interfaces;
 using AppointmentManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,23 @@ namespace AppointmentManagement.Infrastructure.Repositories
             _context.Appointments.Remove(entity);
             await _context.SaveChangesAsync();
         }
+        public async Task<Appointment?> GetByIdAsync(Guid id)
+        {
+            return await _context.Appointments.FindAsync(id);
+        }
+        public async Task UpdateAsync(AppointmentListDto dto)
+        {
+            var appointment = await _context.Appointments.FindAsync(dto.Id);
 
+            if (appointment == null)
+                throw new Exception("Randevu bulunamadı");
+
+            appointment.FirstName = dto.FirstName;
+            appointment.LastName = dto.LastName;
+            appointment.AppointmentDate = dto.AppointmentDate;
+
+            _context.Appointments.Update(appointment);
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace AppointmentManagement.Application.Interfaces
         Task CreateAsync(AppointmentCreateDto dto);
         Task<List<AppointmentListDto>> GetAllAsync();
         Task DeleteAsync(Guid id);
-
+        Task<AppointmentListDto?> GetByIdAsync(Guid id);
+        Task UpdateAsync(AppointmentListDto appointmentListDto);
     }
 }

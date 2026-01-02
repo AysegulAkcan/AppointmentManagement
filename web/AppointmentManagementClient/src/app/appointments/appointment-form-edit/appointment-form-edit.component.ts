@@ -28,22 +28,51 @@ export class AppointmentFormEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // if (this.data?.id) {
-    //   this.isEdit = true;
-    //   this.service.getById(this.data.id).subscribe(x => {
-    //     this.form.patchValue(x);
-    //   });
-    // }
+    if (this.data?.id) {
+      this.isEdit = true;
+      this.service.getById(this.data.id).subscribe(x => {
+        this.form.patchValue(x);
+      });
+    }
   }
 
-  save() {
-    if (this.form.invalid) return;
+  save() {    if (this.form.invalid) {
+      return;
+    }
 
-    // const request =  this.service.create(this.form.value);
+    const formValue = this.form.value;
 
-    // request.subscribe(() => {
-    //   this.dialogRef.close(true); // listeye "yenile" sinyali
-    // });
+    if (this.isEdit) {
+      // Güncelleme
+      this.service.update({
+        id: formValue.id!,
+        firstName: formValue.firstName!,
+        lastName: formValue.lastName!,
+        appointmentDate: formValue.appointmentDate!
+      }).subscribe({
+        next: () => {
+          this.dialogRef.close(true); // true = başarılı
+        },
+        error: (err) => {
+          console.error('Güncelleme hatası:', err);
+          alert('Randevu güncellenirken bir hata oluştu.');
+        }
+      });
+    } else {
+      this.service.create({
+        firstName: formValue.firstName!,
+        lastName: formValue.lastName!,
+        appointmentDate: formValue.appointmentDate!
+      }).subscribe({
+        next: () => {
+          this.dialogRef.close(true); // true = başarılı
+        },
+        error: (err) => {
+          console.error('Oluşturma hatası:', err);
+          alert('Randevu oluşturulurken bir hata oluştu.');
+        }
+      });
+    }
   }
 
   close() {
